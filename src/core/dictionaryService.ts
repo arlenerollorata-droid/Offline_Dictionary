@@ -27,5 +27,32 @@ export function searchFuzzy(input: string, maxDistance = 2, limit = 10): string[
 }
 
 export function getWordDefinition(word: string): string {
-  return `${word}: Placeholder definition. Replace with your full offline dictionary dataset.`;
+  const { getDefinition } = require("./definitions");
+  return getDefinition(word);
+}
+
+export function findAnagrams(word: string, limit = 20): string[] {
+  const normalized = word.toLowerCase().trim();
+  if (!normalized) return [];
+
+  const sorted = normalized.split("").sort().join("");
+  const results: string[] = [];
+
+  for (const w of seedWords) {
+    if (results.length >= limit) break;
+    if (w === normalized) continue;
+    if (w.length !== normalized.length) continue;
+    if (w.split("").sort().join("") === sorted) {
+      results.push(w);
+    }
+  }
+
+  return results;
+}
+
+export function getWordOfTheDay(): string {
+  const today = new Date();
+  const seed = today.getFullYear() * 10000 + today.getMonth() * 100 + today.getDate();
+  const index = seed % seedWords.length;
+  return seedWords[index];
 }

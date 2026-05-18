@@ -1,0 +1,282 @@
+const curated: Record<string, string> = {
+  apple: "A round fruit with red or green skin and crisp white flesh",
+  book: "A set of written or printed pages bound together as a readable volume",
+  cat: "A small domesticated carnivorous mammal with soft fur",
+  dog: "A domesticated carnivorous mammal, often kept as a pet",
+  education: "The process of receiving or giving systematic instruction",
+  future: "The time yet to come; what will happen after the present",
+  garden: "A piece of ground used for growing flowers, vegetables, or plants",
+  hello: "Used as a greeting or to begin a conversation",
+  history: "The study of past events, particularly in human affairs",
+  language: "A system of communication used by a particular country or community",
+  mobile: "Able to move or be moved freely or easily",
+  offline: "Not connected to or accessible via the internet",
+  search: "To try to find something by looking or seeking carefully",
+  student: "A person who is studying at a school or college",
+  technology: "The application of scientific knowledge for practical purposes",
+  word: "A single distinct unit of language with a particular meaning",
+  world: "The earth and all its countries, peoples, and natural features",
+  computer: "An electronic device for storing and processing data",
+  banana: "A long curved fruit with yellow skin and soft sweet flesh",
+  bag: "A flexible container made of cloth, paper, or plastic",
+  react: "To respond or behave in a particular way in response to something",
+  read: "To look at and comprehend written or printed words",
+  real: "Actually existing as a thing; not imaginary",
+  trie: "A tree-like data structure used for storing and searching strings",
+  yellow: "The color of egg yolks or ripe lemons",
+  yacht: "A medium-sized sailing boat used for racing or cruising",
+  yoga: "A system of physical and mental exercises originating in India",
+  zebra: "An African wild horse with black and white stripes",
+  zenith: "The highest point reached in the sky by a celestial body",
+  zoo: "A facility where wild animals are kept for public display",
+  water: "A colorless transparent liquid essential for all life forms",
+  fire: "Combustion producing heat, light, and flames",
+  earth: "The planet we live on; soil or ground",
+  wind: "The natural movement of air",
+  rain: "Water that falls in drops from clouds in the sky",
+  snow: "Frozen water vapor falling as white flakes",
+  sun: "The star around which the earth orbits",
+  moon: "A natural satellite that orbits a planet",
+  star: "A luminous celestial body visible in the night sky",
+  sky: "The upper atmosphere visible from the earth's surface",
+  ocean: "A large continuous body of salt water",
+  river: "A large natural stream of water flowing to the sea",
+  mountain: "A large natural elevation of the earth's surface",
+  forest: "A large area covered chiefly with trees",
+  flower: "The reproductive structure of a seed-bearing plant",
+  tree: "A tall plant with a trunk and branches",
+  bird: "A warm-blooded animal with feathers and wings",
+  fish: "A cold-blooded aquatic animal with gills and fins",
+  horse: "A large solid-hoofed animal used for riding",
+  house: "A building for human habitation",
+  school: "An institution for educating children and students",
+  music: "Vocal or instrumental sounds arranged in harmony",
+  art: "The expression of creative skill through visual or performing forms",
+  science: "The systematic study of the natural and physical world",
+  math: "The study of numbers, quantities, and shapes",
+  health: "The state of being free from illness or injury",
+  love: "An intense feeling of deep affection",
+  peace: "Freedom from disturbance or conflict",
+  light: "The natural agent that stimulates sight and makes things visible",
+  dark: "The absence of light",
+  time: "The indefinite continued progress of existence",
+  life: "The condition of being alive",
+  dream: "A series of thoughts and images occurring during sleep",
+  hope: "A feeling of expectation and desire for something to happen",
+  smile: "To form one's features into a pleased or kind expression",
+  laugh: "To make sounds showing amusement or joy",
+  cry: "To shed tears as an expression of distress or pain",
+  run: "To move at a speed faster than walking",
+  walk: "To move at a regular pace by lifting each foot in turn",
+  jump: "To push oneself off the ground using one's legs",
+  swim: "To propel oneself through water using limbs",
+  fly: "To move through air using wings or aircraft",
+  eat: "To consume food by chewing and swallowing",
+  drink: "To consume a liquid through the mouth",
+  sleep: "To rest in a state of unconsciousness",
+  think: "To have thoughts or form ideas in the mind",
+  learn: "To gain knowledge or skill through study or experience",
+  teach: "To impart knowledge or skill to someone",
+  build: "To construct something by assembling parts",
+  create: "To bring something into existence",
+  change: "To make or become different",
+  help: "To make it easier for someone to do something",
+  give: "To freely transfer possession of something to someone",
+  take: "To lay hold of something with the hands",
+  make: "To form something by putting parts together",
+  know: "To be aware of through observation or information",
+  want: "To have a desire to possess or do something",
+  need: "To require something essential",
+  good: "To be desired or approved of; morally right",
+  bad: "Of poor quality or a low standard",
+  big: "Of considerable size or extent",
+  small: "Of a size less than normal",
+  new: "Not existing before; recently made or discovered",
+  old: "Having existed for a long time",
+  fast: "Moving or capable of moving at high speed",
+  slow: "Moving at a low speed",
+  hot: "Having a high temperature",
+  cold: "At a low temperature",
+  happy: "Feeling or showing pleasure or contentment",
+  sad: "Feeling sorrow or unhappiness",
+  beautiful: "Pleasing the senses or mind aesthetically",
+  strong: "Having the power to move heavy weights or perform demanding tasks",
+  brave: "Ready to face danger or pain without showing fear",
+  smart: "Having or showing quick intelligence",
+  kind: "Generous and considerate towards others",
+  rich: "Having abundant wealth or resources",
+  poor: "Lacking sufficient money or material possessions",
+  free: "Not under the control of another; at liberty",
+  true: "In accordance with fact or reality",
+  false: "Not according with truth or fact",
+  open: "Allowing access or passage; not closed",
+  close: "Shut; not open",
+  begin: "To start or commence an action or process",
+  end: "To come to a conclusion or termination",
+  arrive: "To reach a destination",
+  leave: "To go away from a place",
+  enter: "To come or go into a place",
+  exit: "To leave or depart from a place",
+  answer: "A spoken or written reply to a question",
+  question: "A sentence seeking information or a response",
+  story: "An account of imaginary or real events",
+  song: "A short poem or set of words set to music",
+  game: "An activity for amusement or competitive play",
+  sport: "An activity involving physical exertion and skill",
+  team: "A group of people working or playing together",
+  friend: "A person with whom one has a bond of mutual affection",
+  family: "A group of related people living together",
+  home: "The place where one lives permanently",
+  city: "A large and densely populated urban area",
+  country: "A nation with its own government and territory",
+  street: "A public road in a city or town",
+  bridge: "A structure carrying a road or path over an obstacle",
+  door: "A movable barrier at the entrance to a room or building",
+  window: "An opening in a wall fitted with glass for light and air",
+  table: "A piece of furniture with a flat top and legs",
+  chair: "A seat with a back for one person",
+  bed: "A piece of furniture for sleeping on",
+  food: "Any substance consumed for nutritional support",
+  bread: "A staple food made from flour and water baked together",
+  milk: "A white nutrient-rich liquid produced by mammals",
+  egg: "A oval object laid by birds, containing a developing embryo",
+  meat: "The flesh of an animal used as food",
+  fruit: "The sweet product of a tree or plant containing seeds",
+  vegetable: "A plant or part of a plant used as food",
+  sugar: "A sweet crystalline substance from sugar cane or beet",
+  salt: "A white crystalline substance used to season food",
+  cup: "A small bowl-shaped container for drinking",
+  plate: "A flat dish for holding food",
+  knife: "A cutting tool with a blade",
+  fork: "A utensil with prongs for eating food",
+  spoon: "A utensil with a shallow bowl for eating or serving",
+};
+
+const prefixMeanings: [string, string][] = [
+  ["un", "not or opposite of"],
+  ["re", "again or back"],
+  ["pre", "before"],
+  ["dis", "not or opposite of"],
+  ["mis", "wrongly"],
+  ["over", "too much or above"],
+  ["under", "below or too little"],
+  ["out", "beyond or exceeding"],
+  ["in", "in or into"],
+  ["im", "not"],
+  ["non", "not"],
+  ["anti", "against"],
+  ["auto", "self"],
+  ["bi", "two"],
+  ["tri", "three"],
+  ["multi", "many"],
+  ["semi", "half or partly"],
+  ["sub", "under or below"],
+  ["super", "above or beyond"],
+  ["trans", "across or beyond"],
+  ["inter", "between or among"],
+  ["intra", "within"],
+  ["extra", "outside or beyond"],
+  ["micro", "small"],
+  ["macro", "large"],
+  ["mini", "small"],
+  ["hyper", "excessive or above"],
+  ["hypo", "under or below"],
+  ["pro", "for or forward"],
+  ["de", "down or away from"],
+  ["en", "to put into or cause to be"],
+  ["em", "to put into or cause to be"],
+  ["fore", "before or front"],
+  ["post", "after"],
+  ["counter", "against or opposite"],
+  ["co", "together or with"],
+  ["col", "together"],
+  ["com", "together"],
+  ["con", "together"],
+];
+
+const suffixMeanings: [string, string][] = [
+  ["tion", "the action or process of"],
+  ["sion", "the action or process of"],
+  ["ment", "the result or means of"],
+  ["ness", "the state or quality of"],
+  ["ity", "the state or quality of"],
+  ["ful", "full of"],
+  ["less", "without"],
+  ["able", "capable of being"],
+  ["ible", "capable of being"],
+  ["ous", "full of or characterized by"],
+  ["ive", "tending to or performing"],
+  ["al", "relating to"],
+  ["ic", "relating to or having the nature of"],
+  ["ical", "relating to"],
+  ["ize", "to make or become"],
+  ["ise", "to make or become"],
+  ["ify", "to make or become"],
+  ["en", "to make or become"],
+  ["ly", "in a certain manner"],
+  ["ward", "in the direction of"],
+  ["er", "a person who does"],
+  ["or", "a person who does"],
+  ["ist", "a person who practices or believes"],
+  ["ism", "a doctrine or practice"],
+  ["dom", "the state or condition of"],
+  ["ship", "the state or condition of"],
+  ["hood", "the state or condition of"],
+  ["ance", "the action or state of"],
+  ["ence", "the action or state of"],
+  ["ure", "the action or result of"],
+  ["age", "the action or result of"],
+  ["ing", "the action of"],
+];
+
+function findPrefix(word: string): string | null {
+  for (const [p] of prefixMeanings) {
+    if (word.startsWith(p) && word.length > p.length + 2) return p;
+  }
+  return null;
+}
+
+function findSuffix(word: string): string | null {
+  for (const [s] of suffixMeanings) {
+    if (word.endsWith(s) && word.length > s.length + 2) return s;
+  }
+  return null;
+}
+
+function structuralDescription(word: string): string {
+  const vowelCount = (word.match(/[aeiou]/gi) || []).length;
+  const consonantCount = word.length - vowelCount;
+  const firstLetter = word[0]?.toUpperCase();
+  const lastLetter = word[word.length - 1];
+
+  if (word.length <= 2) {
+    return `A ${word.length}-letter word starting with '${word[0]}'`;
+  }
+
+  const prefix = findPrefix(word);
+  const suffix = findSuffix(word);
+
+  if (prefix && suffix) {
+    const [, pMeaning] = prefixMeanings.find(([p]) => p === prefix)!;
+    const [, sMeaning] = suffixMeanings.find(([s]) => s === suffix)!;
+    return `${pMeaning}${sMeaning}something`;
+  }
+
+  if (prefix) {
+    const [, pMeaning] = prefixMeanings.find(([p]) => p === prefix)!;
+    return `${pMeaning}${word.slice(prefix.length)}`;
+  }
+
+  if (suffix) {
+    const [, sMeaning] = suffixMeanings.find(([s]) => s === suffix)!;
+    return `${sMeaning}${word.slice(0, -suffix.length)}`;
+  }
+
+  return `A ${word.length}-letter word starting with '${firstLetter}' and ending with '${lastLetter}'`;
+}
+
+export function getDefinition(word: string): string {
+  const normalized = word.toLowerCase().trim();
+  if (curated[normalized]) return curated[normalized];
+  return structuralDescription(normalized);
+}
