@@ -32,6 +32,9 @@ export function dictionaryReducer(state: DictionaryState, action: DictionaryActi
     case "SET_FUZZY_THRESHOLD":
       return { ...state, fuzzyThreshold: Math.max(0, Math.min(5, action.payload)) };
 
+    case "CLEAR_HISTORY":
+      return { ...state, history: [] };
+
     case "HYDRATE":
       return { ...state, ...action.payload };
 

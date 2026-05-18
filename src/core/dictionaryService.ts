@@ -31,23 +31,27 @@ export function getWordDefinition(word: string): string {
   return getDefinition(word);
 }
 
+const anagramMap = new Map<string, string[]>();
+
+for (const w of seedWords) {
+  const key = w.split("").sort().join("");
+  const list = anagramMap.get(key);
+  if (list) {
+    list.push(w);
+  } else {
+    anagramMap.set(key, [w]);
+  }
+}
+
 export function findAnagrams(word: string, limit = 20): string[] {
   const normalized = word.toLowerCase().trim();
   if (!normalized) return [];
 
-  const sorted = normalized.split("").sort().join("");
-  const results: string[] = [];
+  const key = normalized.split("").sort().join("");
+  const matches = anagramMap.get(key);
+  if (!matches) return [];
 
-  for (const w of seedWords) {
-    if (results.length >= limit) break;
-    if (w === normalized) continue;
-    if (w.length !== normalized.length) continue;
-    if (w.split("").sort().join("") === sorted) {
-      results.push(w);
-    }
-  }
-
-  return results;
+  return matches.filter(w => w !== normalized).slice(0, limit);
 }
 
 export function getWordOfTheDay(): string {

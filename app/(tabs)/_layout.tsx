@@ -1,10 +1,12 @@
 import { Ionicons } from "@expo/vector-icons";
 import { Link, Tabs } from "expo-router";
 import { Pressable } from "react-native";
+import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { useTheme } from "../../src/theme/ThemeContext";
 
 export default function TabLayout() {
   const t = useTheme();
+  const insets = useSafeAreaInsets();
 
   return (
     <Tabs
@@ -12,12 +14,12 @@ export default function TabLayout() {
         headerRight: () => (
           <Link asChild href="/settings">
             <Pressable style={{ marginRight: 16, padding: 4 }}>
-              <Ionicons name="settings-outline" size={22} color={t.accent} />
+              <Ionicons name="settings-outline" size={22} color={t.white} />
             </Pressable>
           </Link>
         ),
-        headerStyle: { backgroundColor: t.bg },
-        headerTitleStyle: { fontWeight: "700", color: t.text },
+        headerStyle: { backgroundColor: t.headerBg },
+        headerTitleStyle: { fontWeight: "700", color: "#fff" },
         headerShadowVisible: false,
         tabBarActiveTintColor: t.accent,
         tabBarInactiveTintColor: t.textSubtle,
@@ -27,10 +29,17 @@ export default function TabLayout() {
           borderTopWidth: 1,
           elevation: 0,
           shadowOpacity: 0,
+          height: 50 + insets.bottom,
+          paddingBottom: insets.bottom,
+          paddingTop: 6,
         },
         tabBarLabelStyle: {
           fontWeight: "600",
           fontSize: 11,
+          marginTop: 2,
+        },
+        tabBarItemStyle: {
+          gap: 2,
         },
       }}
     >

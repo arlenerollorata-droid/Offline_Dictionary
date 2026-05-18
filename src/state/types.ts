@@ -12,6 +12,7 @@ export type DictionaryAction =
   | { type: "ADD_HISTORY"; payload: string }
   | { type: "SET_MAX_SUGGESTIONS"; payload: number }
   | { type: "SET_FUZZY_THRESHOLD"; payload: number }
+  | { type: "CLEAR_HISTORY" }
   | { type: "HYDRATE"; payload: Partial<DictionaryState> };
 
 export const initialState: DictionaryState = {

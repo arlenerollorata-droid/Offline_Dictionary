@@ -1,4 +1,7 @@
+import { expandedCurated } from "./expandedDefinitions";
+
 const curated: Record<string, string> = {
+  ...expandedCurated,
   apple: "A round fruit with red or green skin and crisp white flesh",
   book: "A set of written or printed pages bound together as a readable volume",
   cat: "A small domesticated carnivorous mammal with soft fur",
@@ -244,35 +247,26 @@ function findSuffix(word: string): string | null {
 }
 
 function structuralDescription(word: string): string {
-  const vowelCount = (word.match(/[aeiou]/gi) || []).length;
-  const consonantCount = word.length - vowelCount;
-  const firstLetter = word[0]?.toUpperCase();
-  const lastLetter = word[word.length - 1];
-
-  if (word.length <= 2) {
-    return `A ${word.length}-letter word starting with '${word[0]}'`;
-  }
-
   const prefix = findPrefix(word);
   const suffix = findSuffix(word);
+
+  let analysis = `Definition not found in offline database. `;
 
   if (prefix && suffix) {
     const [, pMeaning] = prefixMeanings.find(([p]) => p === prefix)!;
     const [, sMeaning] = suffixMeanings.find(([s]) => s === suffix)!;
-    return `${pMeaning}${sMeaning}something`;
-  }
-
-  if (prefix) {
+    analysis += `Linguistic analysis suggests this word might relate to "${pMeaning}" and "${sMeaning}something".`;
+  } else if (prefix) {
     const [, pMeaning] = prefixMeanings.find(([p]) => p === prefix)!;
-    return `${pMeaning}${word.slice(prefix.length)}`;
-  }
-
-  if (suffix) {
+    analysis += `Linguistic analysis suggests a meaning related to "${pMeaning}".`;
+  } else if (suffix) {
     const [, sMeaning] = suffixMeanings.find(([s]) => s === suffix)!;
-    return `${sMeaning}${word.slice(0, -suffix.length)}`;
+    analysis += `Linguistic analysis suggests a meaning related to "${sMeaning}".`;
+  } else {
+    analysis += `This is a ${word.length}-letter word starting with '${word[0].toUpperCase()}'.`;
   }
 
-  return `A ${word.length}-letter word starting with '${firstLetter}' and ending with '${lastLetter}'`;
+  return analysis;
 }
 
 export function getDefinition(word: string): string {

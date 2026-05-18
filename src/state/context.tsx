@@ -8,6 +8,7 @@ type DictionaryContextValue = {
   setQuery: (query: string) => void;
   toggleFavorite: (word: string) => void;
   addHistory: (word: string) => void;
+  clearHistory: () => void;
   setMaxSuggestions: (value: number) => void;
   setFuzzyThreshold: (value: number) => void;
 };
@@ -43,6 +44,7 @@ export function DictionaryProvider({ children }: { children: React.ReactNode }) 
       setQuery: (query) => dispatch({ type: "SET_QUERY", payload: query }),
       toggleFavorite: (word) => dispatch({ type: "TOGGLE_FAVORITE", payload: word }),
       addHistory: (word) => dispatch({ type: "ADD_HISTORY", payload: word }),
+      clearHistory: () => dispatch({ type: "CLEAR_HISTORY" }),
       setMaxSuggestions: (value) => dispatch({ type: "SET_MAX_SUGGESTIONS", payload: value }),
       setFuzzyThreshold: (value) => dispatch({ type: "SET_FUZZY_THRESHOLD", payload: value })
     }),

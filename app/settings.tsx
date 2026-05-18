@@ -13,11 +13,11 @@ export default function SettingsScreen() {
 
   useLayoutEffect(() => {
     navigation.setOptions({
-      headerStyle: { backgroundColor: t.bg },
-      headerTitleStyle: { color: t.text, fontWeight: "700" },
-      headerTintColor: t.accent,
+      headerStyle: { backgroundColor: t.headerBg },
+      headerTintColor: "#fff",
+      headerTitleStyle: { color: "#fff", fontWeight: "700" },
     });
-  }, [navigation, t]);
+  }, [navigation, t.headerBg]);
 
   const [inputMax, setInputMax] = useState(String(state.maxSuggestions));
   const [inputThreshold, setInputThreshold] = useState(String(state.fuzzyThreshold));
@@ -54,7 +54,19 @@ export default function SettingsScreen() {
         container: { flex: 1, backgroundColor: t.bg },
         content: { padding: 20 },
         pageTitle: { fontSize: 30, fontWeight: "800", color: t.text, marginBottom: 24, letterSpacing: -0.5 },
-        card: { backgroundColor: t.card, borderRadius: 14, padding: 20, marginBottom: 16, borderWidth: 1, borderColor: t.border },
+        card: {
+          backgroundColor: t.card,
+          borderRadius: 14,
+          padding: 20,
+          marginBottom: 16,
+          borderWidth: 1,
+          borderColor: t.border,
+          shadowColor: "#000",
+          shadowOffset: { width: 0, height: 2 },
+          shadowOpacity: 0.05,
+          shadowRadius: 8,
+          elevation: 2,
+        },
         cardHead: { flexDirection: "row", alignItems: "center", marginBottom: 16 },
         cardTitle: { fontSize: 12, fontWeight: "700", color: t.textMuted, textTransform: "uppercase", letterSpacing: 1 },
         label: { fontSize: 14, fontWeight: "600", color: t.text, marginBottom: 8 },
@@ -70,7 +82,8 @@ export default function SettingsScreen() {
           color: t.text,
           marginBottom: 8,
         },
-        statRow: { flexDirection: "row", justifyContent: "space-between", alignItems: "center", paddingVertical: 8 },
+        statRow: { flexDirection: "row", justifyContent: "space-between", alignItems: "center", paddingVertical: 10, borderBottomWidth: 1, borderBottomColor: t.border },
+        statRowLast: { flexDirection: "row", justifyContent: "space-between", alignItems: "center", paddingVertical: 10 },
         statLabel: { fontSize: 14, fontWeight: "500", color: t.textSecondary },
         statValue: { fontSize: 16, fontWeight: "700", color: t.accent },
         hint: { fontSize: 12, color: t.textMuted, lineHeight: 18 },
@@ -127,6 +140,7 @@ export default function SettingsScreen() {
           onEndEditing={commitMax}
           onBlur={commitMax}
           maxLength={2}
+          keyboardAppearance={t.mode === "dark" ? "dark" : "light"}
         />
         <Text style={styles.hint}>Showing up to {state.maxSuggestions} suggestions per search</Text>
         <Text style={styles.recommend}>Recommended: 20</Text>
@@ -142,6 +156,7 @@ export default function SettingsScreen() {
           onEndEditing={commitThreshold}
           onBlur={commitThreshold}
           maxLength={1}
+          keyboardAppearance={t.mode === "dark" ? "dark" : "light"}
         />
         <Text style={styles.hint}>{state.fuzzyThreshold} character edits allowed. Lower = stricter.</Text>
       </View>
@@ -159,7 +174,7 @@ export default function SettingsScreen() {
           <Text style={styles.statLabel}>Favorites</Text>
           <Text style={styles.statValue}>{state.favorites.length}</Text>
         </View>
-        <View style={styles.statRow}>
+        <View style={styles.statRowLast}>
           <Text style={styles.statLabel}>History</Text>
           <Text style={styles.statValue}>{state.history.length}</Text>
         </View>

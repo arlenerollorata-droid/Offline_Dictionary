@@ -5,16 +5,17 @@ import { Animated, Easing, StyleSheet, Text, View, useColorScheme } from "react-
 type Props = {
   onFinish: () => void;
   wordCount: number;
+  themeMode?: "light" | "dark" | null;
 };
 
-export default function SplashScreen({ onFinish, wordCount }: Props) {
-  const scheme = useColorScheme();
-  const dark = scheme === "dark";
+export default function SplashScreen({ onFinish, wordCount, themeMode }: Props) {
+  const systemScheme = useColorScheme();
+  const dark = themeMode ? themeMode === "dark" : systemScheme === "dark";
   const bg = dark ? "#0a0a0a" : "#fff";
   const fg = dark ? "#f5f5f5" : "#1a1a1a";
   const mg = dark ? "#9ca3af" : "#6b7280";
-  const accent = dark ? "#f87171" : "#c62828";
-  const accentBg = dark ? "rgba(248,113,113,0.12)" : "rgba(198,40,40,0.08)";
+  const accent = dark ? "#C62828" : "#7B1818";
+  const accentBg = dark ? "rgba(198,40,40,0.12)" : "rgba(123,24,24,0.08)";
   const track = dark ? "#262626" : "#f3f4f6";
 
   const fadeAnim = useRef(new Animated.Value(0)).current;

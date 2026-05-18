@@ -13,11 +13,11 @@ export default function AdvancedSearchModal() {
 
   useLayoutEffect(() => {
     navigation.setOptions({
-      headerStyle: { backgroundColor: t.bg },
-      headerTitleStyle: { color: t.text, fontWeight: "700" },
-      headerTintColor: t.accent,
+      headerStyle: { backgroundColor: t.headerBg },
+      headerTintColor: "#fff",
+      headerTitleStyle: { color: "#fff", fontWeight: "700" },
     });
-  }, [navigation, t]);
+  }, [navigation, t.headerBg]);
   const [focused, setFocused] = useState(false);
 
   const wildcardMatches = useMemo(() => {
@@ -36,21 +36,26 @@ export default function AdvancedSearchModal() {
         searchContainer: {
           flexDirection: "row",
           alignItems: "center",
-          backgroundColor: t.surface,
-          borderRadius: 12,
+          backgroundColor: t.card,
+          borderRadius: 14,
           paddingHorizontal: 14,
           borderWidth: 2,
-          borderColor: focused ? t.accent : "transparent",
+          borderColor: focused ? t.accent : t.border,
           marginBottom: 20,
+          shadowColor: "#000",
+          shadowOffset: { width: 0, height: 1 },
+          shadowOpacity: 0.05,
+          shadowRadius: 4,
+          elevation: 1,
         },
         searchIcon: { marginRight: 10 },
-        input: { flex: 1, paddingVertical: 12, fontSize: 16, color: t.text, fontWeight: "500" },
+        input: { flex: 1, paddingVertical: 14, fontSize: 16, color: t.text, fontWeight: "500" },
         list: { paddingBottom: 20 },
         item: {
           flexDirection: "row",
           alignItems: "center",
           justifyContent: "space-between",
-          paddingVertical: 14,
+          paddingVertical: 16,
           paddingHorizontal: 4,
           borderBottomWidth: 1,
           borderBottomColor: t.border,
@@ -80,6 +85,7 @@ export default function AdvancedSearchModal() {
           style={styles.input}
           onFocus={() => setFocused(true)}
           onBlur={() => setFocused(false)}
+          keyboardAppearance={t.mode === "dark" ? "dark" : "light"}
         />
         {state.query.length > 0 && (
           <Pressable onPress={() => setQuery("")}>

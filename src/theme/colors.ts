@@ -10,35 +10,38 @@ export type ThemeColors = {
   textSubtle: string;
   accent: string;
   accentTint: string;
+  headerBg: string;
   white: string;
 };
 
 export const light: ThemeColors = {
-  bg: "#fff",
-  surface: "#f5f5f5",
+  bg: "#fafafa",
+  surface: "#f0f0f0",
   card: "#fff",
-  border: "#f3f4f6",
-  borderStrong: "#e5e7eb",
-  text: "#1a1a1a",
-  textSecondary: "#374151",
-  textMuted: "#6b7280",
-  textSubtle: "#9ca3af",
-  accent: "#c62828",
-  accentTint: "rgba(198,40,40,0.08)",
+  border: "#e5e5e5",
+  borderStrong: "#d4d4d4",
+  text: "#000",
+  textSecondary: "#1a1a1a",
+  textMuted: "#555",
+  textSubtle: "#888",
+  accent: "#7B1818",
+  accentTint: "rgba(123,24,24,0.08)",
+  headerBg: "#7B1818",
   white: "#fff",
 };
 
 export const dark: ThemeColors = {
-  bg: "#0a0a0a",
-  surface: "#141414",
+  bg: "#000",
+  surface: "#111",
   card: "#1a1a1a",
-  border: "#262626",
+  border: "#2a2a2a",
   borderStrong: "#333",
-  text: "#f5f5f5",
-  textSecondary: "#d1d5db",
-  textMuted: "#9ca3af",
-  textSubtle: "#6b7280",
-  accent: "#f87171",
-  accentTint: "rgba(248,113,113,0.12)",
+  text: "#fff",
+  textSecondary: "#e0e0e0",
+  textMuted: "#aaa",
+  textSubtle: "#777",
+  accent: "#C62828",
+  accentTint: "rgba(198,40,40,0.15)",
+  headerBg: "#7B1818",
   white: "#fff",
 };

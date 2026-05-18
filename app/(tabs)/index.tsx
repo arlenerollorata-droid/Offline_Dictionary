@@ -1,7 +1,7 @@
 import { Ionicons } from "@expo/vector-icons";
 import { Link } from "expo-router";
-import { useMemo, useState } from "react";
-import { FlatList, Pressable, StyleSheet, Text, TextInput, View } from "react-native";
+import { useMemo, useRef, useState } from "react";
+import { Animated, FlatList, Pressable, StyleSheet, Text, TextInput, View } from "react-native";
 import { searchFuzzy, searchPrefix, searchWildcard, wordsLoaded, getWordOfTheDay } from "../../src/core/dictionaryService";
 import { useDictionary } from "../../src/state/context";
 import { useTheme } from "../../src/theme/ThemeContext";
@@ -24,6 +24,10 @@ export default function SearchScreen() {
   const [metrics, setMetrics] = useState<QueryMetrics>({ timeMs: 0, mode: "none", count: 0 });
   const [focused, setFocused] = useState(false);
   const wotd = useMemo(() => getWordOfTheDay(), []);
+  const scaleAnim = useRef(new Animated.Value(1)).current;
+
+  const onPressIn = () => Animated.spring(scaleAnim, { toValue: 0.97, useNativeDriver: true }).start();
+  const onPressOut = () => Animated.spring(scaleAnim, { toValue: 1, useNativeDriver: true }).start();
 
   const rows = useMemo<Row[]>(() => {
     const startTime = performance.now();
@@ -77,27 +81,79 @@ export default function SearchScreen() {
         searchContainer: {
           flexDirection: "row",
           alignItems: "center",
-          backgroundColor: t.surface,
-          borderRadius: 12,
+          backgroundColor: t.card,
+          borderRadius: 14,
           paddingHorizontal: 14,
           borderWidth: 2,
-          borderColor: focused ? t.accent : "transparent",
+          borderColor: focused ? t.accent : t.border,
+          shadowColor: focused ? t.accent : "#000",
+          shadowOffset: { width: 0, height: focused ? 4 : 1 },
+          shadowOpacity: focused ? 0.15 : 0.05,
+          shadowRadius: focused ? 12 : 4,
+          elevation: focused ? 4 : 1,
         },
         searchIcon: { marginRight: 10 },
-        input: { flex: 1, paddingVertical: 12, fontSize: 16, color: t.text, fontWeight: "500" },
-        metricsRow: { flexDirection: "row", alignItems: "center", marginTop: 8, gap: 10 },
+        input: { flex: 1, paddingVertical: 14, fontSize: 16, color: t.text, fontWeight: "500" },
+        metricsRow: { flexDirection: "row", alignItems: "center", marginTop: 10, gap: 10 },
         modeBadge: {
           flexDirection: "row",
           alignItems: "center",
-          paddingHorizontal: 8,
-          paddingVertical: 3,
-          borderRadius: 5,
+          paddingHorizontal: 10,
+          paddingVertical: 4,
+          borderRadius: 6,
           backgroundColor: t.accentTint,
         },
         modeText: { color: t.accent, fontWeight: "700", fontSize: 10, textTransform: "uppercase", letterSpacing: 0.5 },
         metricText: { fontSize: 12, color: t.textSubtle, fontWeight: "500" },
-        emptyWelcome: { alignItems: "center", paddingVertical: 24 },
+        emptyWelcome: { alignItems: "center", paddingTop: 24, paddingHorizontal: 20 },
         welcomeIcon: {
+          width: 72,
+          height: 72,
+          borderRadius: 36,
+          backgroundColor: t.accentTint,
+          alignItems: "center",
+          justifyContent: "center",
+          marginBottom: 16,
+        },
+        welcomeTitle: { fontSize: 20, fontWeight: "800", color: t.text, marginBottom: 4, letterSpacing: -0.3 },
+        welcomeSub: { fontSize: 14, color: t.textMuted, fontWeight: "400", marginBottom: 24 },
+        tipsBtn: {
+          flexDirection: "row",
+          alignItems: "center",
+          paddingVertical: 10,
+          paddingHorizontal: 18,
+          borderRadius: 10,
+          backgroundColor: t.accentTint,
+        },
+        tipsBtnText: { color: t.accent, fontWeight: "600", fontSize: 14 },
+        wotdCard: {
+          marginTop: 20,
+          padding: 20,
+          backgroundColor: t.card,
+          borderRadius: 14,
+          borderWidth: 1,
+          borderColor: t.border,
+          borderLeftWidth: 4,
+          borderLeftColor: t.accent,
+          alignSelf: "stretch",
+          shadowColor: "#000",
+          shadowOffset: { width: 0, height: 2 },
+          shadowOpacity: 0.06,
+          shadowRadius: 8,
+          elevation: 2,
+        },
+        wotdLabel: {
+          fontSize: 10,
+          fontWeight: "700",
+          color: t.textMuted,
+          textTransform: "uppercase",
+          letterSpacing: 1.5,
+          marginBottom: 6,
+        },
+        wotdWord: { fontSize: 24, fontWeight: "800", color: t.text, letterSpacing: -0.5 },
+        wotdChevron: { marginTop: 8, alignSelf: "flex-end" },
+        emptyState: { alignItems: "center", paddingVertical: 80 },
+        emptyIcon: {
           width: 64,
           height: 64,
           borderRadius: 32,
@@ -106,45 +162,32 @@ export default function SearchScreen() {
           justifyContent: "center",
           marginBottom: 16,
         },
-        welcomeTitle: { fontSize: 18, fontWeight: "700", color: t.text, marginBottom: 4 },
-        welcomeSub: { fontSize: 14, color: t.textMuted, fontWeight: "400", marginBottom: 20 },
-        tipsBtn: {
-          flexDirection: "row",
-          alignItems: "center",
-          paddingVertical: 8,
-          paddingHorizontal: 14,
-          borderRadius: 8,
-          backgroundColor: t.accentTint,
-        },
-        tipsBtnText: { color: t.accent, fontWeight: "600", fontSize: 13 },
-        wotdCard: {
-          marginTop: 16,
-          padding: 16,
-          backgroundColor: t.card,
-          borderRadius: 12,
-          borderWidth: 1,
-          borderColor: t.border,
-          alignSelf: "stretch",
-        },
-        wotdLabel: { fontSize: 10, fontWeight: "700", color: t.textMuted, textTransform: "uppercase", letterSpacing: 1, marginBottom: 4 },
-        wotdWord: { fontSize: 22, fontWeight: "800", color: t.text, letterSpacing: -0.3 },
-        emptyState: { alignItems: "center", paddingVertical: 60 },
-        emptyText: { fontSize: 16, fontWeight: "600", color: t.textMuted, marginTop: 12, marginBottom: 4 },
-        emptyHint: { fontSize: 13, color: t.textSubtle },
+        emptyText: { fontSize: 17, fontWeight: "700", color: t.textMuted, marginBottom: 6 },
+        emptyHint: { fontSize: 14, color: t.textSubtle, textAlign: "center", lineHeight: 20 },
         card: {
           flexDirection: "row",
           alignItems: "center",
           justifyContent: "space-between",
-          paddingVertical: 14,
+          paddingVertical: 16,
           paddingHorizontal: 16,
-          borderBottomWidth: 1,
-          borderBottomColor: t.border,
+          backgroundColor: t.card,
+          marginHorizontal: 16,
+          marginTop: 8,
+          borderRadius: 12,
+          borderWidth: 1,
+          borderColor: t.border,
+          shadowColor: "#000",
+          shadowOffset: { width: 0, height: 1 },
+          shadowOpacity: 0.04,
+          shadowRadius: 4,
+          elevation: 1,
         },
         cardLeft: { flex: 1, flexDirection: "row", alignItems: "center", gap: 10 },
-        cardWord: { fontSize: 16, fontWeight: "600", color: t.text },
-        sourceBadge: { paddingHorizontal: 6, paddingVertical: 2, borderRadius: 4, backgroundColor: t.accentTint },
+        cardWord: { fontSize: 16, fontWeight: "600", color: t.text, textTransform: "capitalize" },
+        sourceBadge: { paddingHorizontal: 8, paddingVertical: 3, borderRadius: 6, backgroundColor: t.accentTint },
         sourceBadgeText: { fontSize: 9, fontWeight: "700", color: t.accent, textTransform: "uppercase" },
-        starBtn: { padding: 4 },
+        starBtn: { padding: 6 },
+        listContent: { paddingBottom: 24, paddingTop: 8 },
       }),
     [t, focused]
   );
@@ -152,7 +195,7 @@ export default function SearchScreen() {
   return (
     <View style={styles.container}>
       <View style={styles.searchWrap}>
-        <View style={styles.searchContainer}>
+        <Animated.View style={[styles.searchContainer, { transform: [{ scale: scaleAnim }] }]}>
           <Ionicons name="search" size={20} color={t.accent} style={styles.searchIcon} />
           <TextInput
             value={query}
@@ -163,13 +206,14 @@ export default function SearchScreen() {
             onFocus={() => setFocused(true)}
             onBlur={() => setFocused(false)}
             onSubmitEditing={() => addHistory(query)}
+            keyboardAppearance={t.mode === "dark" ? "dark" : "light"}
           />
           {query.length > 0 && (
-            <Pressable onPress={() => setQuery("")}>
+            <Pressable onPress={() => setQuery("")} onPressIn={onPressIn} onPressOut={onPressOut}>
               <Ionicons name="close-circle" size={20} color={t.textSubtle} />
             </Pressable>
           )}
-        </View>
+        </Animated.View>
 
         {query.trim() ? (
           <View style={styles.metricsRow}>
@@ -188,10 +232,10 @@ export default function SearchScreen() {
         ) : (
           <View style={styles.emptyWelcome}>
             <View style={styles.welcomeIcon}>
-              <Ionicons name="book-outline" size={32} color={t.accent} />
+              <Ionicons name="book-outline" size={36} color={t.accent} />
             </View>
             <Text style={styles.welcomeTitle}>{wordsLoaded.toLocaleString()} words loaded</Text>
-            <Text style={styles.welcomeSub}>Start typing or use the mic to search</Text>
+            <Text style={styles.welcomeSub}>Start typing to search the dictionary</Text>
             <Link href="/modal" asChild>
               <Pressable style={styles.tipsBtn}>
                 <Ionicons name="bulb-outline" size={16} color={t.accent} style={{ marginRight: 6 }} />
@@ -205,6 +249,9 @@ export default function SearchScreen() {
                   <Text style={styles.wotdWord}>{wotd}</Text>
                 </Pressable>
               </Link>
+              <View style={styles.wotdChevron}>
+                <Ionicons name="arrow-forward" size={16} color={t.accent} />
+              </View>
             </View>
           </View>
         )}
@@ -216,13 +263,15 @@ export default function SearchScreen() {
         ListEmptyComponent={
           query.trim() ? (
             <View style={styles.emptyState}>
-              <Ionicons name="search-outline" size={48} color={t.textSubtle} />
+              <View style={styles.emptyIcon}>
+                <Ionicons name="search-outline" size={32} color={t.accent} />
+              </View>
               <Text style={styles.emptyText}>No matches found</Text>
               <Text style={styles.emptyHint}>Try a different word or check your spelling</Text>
             </View>
           ) : null
         }
-        contentContainerStyle={{ paddingBottom: 24, paddingHorizontal: 16 }}
+        contentContainerStyle={styles.listContent}
         renderItem={({ item }) => (
           <Link href={`/word/${encodeURIComponent(item.word)}`} asChild>
             <Pressable style={styles.card} onPress={() => addHistory(item.word)}>
