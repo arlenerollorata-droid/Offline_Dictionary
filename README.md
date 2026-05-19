@@ -6,6 +6,7 @@
 - **SDK Version:** Expo 54.0.34
 - **Total Words:** 15,034
 - **Name :** Arlene Rollorata | ITMSD 3
+-  **Offline Dictionary Demo :** https://drive.google.com/drive/folders/1_kRRzmsICboNBxXdczVJCdZsawcz-Xpv?usp=drive_link
 ---
 
 **ITMSD 3 Final Project: Cross-Platform Mobile Application**
