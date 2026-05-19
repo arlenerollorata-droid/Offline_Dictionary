@@ -1,9 +1,11 @@
 # Offline Dictionary with Trie Search
 ---
 
-**SDK Version:** Expo 54.0.34
-**Total Words:** 15,034
-**Name :** Arlene Rollorata | ITMSD 3
+## Project Info
+
+- **SDK Version:** Expo 54.0.34
+- **Total Words:** 15,034
+- **Name :** Arlene Rollorata | ITMSD 3
 ---
 
 **ITMSD 3 Final Project: Cross-Platform Mobile Application**

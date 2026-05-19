@@ -16,7 +16,7 @@
       "package": "com.offlinedictionary.trie"
     },
     "splash": {
-      "backgroundColor": "#fff",
+      "backgroundColor": "#FAFAFA",
       "resizeMode": "contain"
     },
     "plugins": [
@@ -24,6 +24,12 @@
     ],
     "experiments": {
       "typedRoutes": true
+    },
+    "extra": {
+      "router": {},
+      "eas": {
+        "projectId": "53cf20f1-25f0-49f1-8a04-582148be709c"
+      }
     }
   }
 }

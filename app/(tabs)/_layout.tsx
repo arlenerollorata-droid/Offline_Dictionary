@@ -1,6 +1,6 @@
 import { Ionicons } from "@expo/vector-icons";
 import { Link, Tabs } from "expo-router";
-import { Pressable } from "react-native";
+import { Platform, Pressable } from "react-native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { useTheme } from "../../src/theme/ThemeContext";
 
@@ -29,17 +29,19 @@ export default function TabLayout() {
           borderTopWidth: 1,
           elevation: 0,
           shadowOpacity: 0,
-          height: 56 + Math.max(insets.bottom, 8),
-          paddingBottom: Math.max(insets.bottom, 8),
-          paddingTop: 8,
+          height: 56 + insets.bottom + (Platform.OS === "android" ? 6 : 8),
+          paddingBottom: insets.bottom + (Platform.OS === "android" ? 6 : 8),
+          paddingTop: 6,
         },
         tabBarLabelStyle: {
           fontWeight: "600",
           fontSize: 11,
           marginTop: 2,
+          marginBottom: 0,
         },
         tabBarItemStyle: {
           gap: 2,
+          paddingVertical: 0,
         },
       }}
     >
